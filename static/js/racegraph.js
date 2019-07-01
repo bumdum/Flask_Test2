@@ -280,7 +280,7 @@ function visualize(data) {
     // Configure scales.
     configureScales(data);
 
-    var vis = d3.select('#chart')
+    var vis = d3.select('#race_graph_container')
         .append('svg:svg')
         .attr('width', WIDTH)
         .attr('height', HEIGHT)
