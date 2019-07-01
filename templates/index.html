@@ -1,8 +1,6 @@
 <!doctype html>
 <title>Formula 1</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
 
 <script>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -10,10 +8,6 @@
 </script>
 <nav>
   <h1>Formula 1</h1>
-  <ul>
-      <li><a href="">Fastest Lap times</a>
-      <li><a href="">Race Map</a>
-  </ul>
 </nav>
 <section class="content">
   <div class="flex-grid-thirds">
@@ -34,6 +28,8 @@
       <div class="col"></div>
     </div>
 </section>
+<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/d3.v3.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script src="{{ url_for('static', filename='js/racegraph.js') }}"></script>
   <script src="{{ url_for('static', filename='js/fastestlaps.js') }}"></script>
