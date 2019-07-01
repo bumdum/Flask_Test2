@@ -1,0 +1,39 @@
+<!doctype html>
+<title>Formula 1</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Formula 1</h1>
+  <ul>
+      <li><a href="{{ url_for('fastestlaps') }}">Fastest Lap times</a>
+      <li><a href="{{ url_for('racemap') }}">Race Map</a>
+  </ul>
+</nav>
+<section class="content">
+  <div class="flex-grid-thirds">
+      <div class="col">
+          <div>
+              <h1 id="raceName" style="font-family:sans-serif;color:whitesmoke;"></h1>
+              <div id="fastest_laps_container" class="svg-container"></div>
+          </div>
+      </div>
+      <div class="col">
+          <div>
+              <h1 style="font-family:sans-serif;color:whitesmoke;">Bahrain Formula 1 Grand Prix, 2017</h1>
+              <div id="chart"></div>
+              <span class="legend">M = mechanical failure | P = pit stop | X = accident |  <span
+        class="safety">safety-car deployed</span> | <span class="lapped">lapped</span> | Mouse click to focus on a lap</span>
+          </div>
+      </div>
+      <div class="col"></div>
+    </div>
+</section>
+<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/fastestlaps.js') }}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script> -->
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script> -->
