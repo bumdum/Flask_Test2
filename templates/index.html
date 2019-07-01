@@ -1,6 +1,9 @@
 <!doctype html>
 <title>Formula 1</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
 <script>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
   var races = {{ g.races|safe }};
@@ -31,9 +34,8 @@
       <div class="col"></div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/racegraph.js') }}"></script>
   <script src="{{ url_for('static', filename='js/fastestlaps.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script> -->
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
