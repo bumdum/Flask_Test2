@@ -8,7 +8,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, g, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 import json
@@ -26,6 +26,7 @@ f1_pit_data = Base.classes.pit_data
 
 @app.route("/")
 def home():
+    g.races = db.session.query(f1_data.raceId, f1_data.race_name).distinct().filter_by(f1_data.year = 2017).all()
     return render_template("index.html")
 
 @app.route("/data")
@@ -183,6 +184,11 @@ def pit():
     return jsonify(pit_list)
 
 
+@app.route("/get_fastest_laps")
+def fastestlaps():
+    raceId = request.args.get('a', 0, type=int)
+    results = db.session.query(*sel).filter_by(sel.f1_lap_data.raceId = raceId).order_by(sel.f1_lap_data.position).limit(3).all()
+    return jsonify([dict(zip(tuple ('nt') ,i)) for i in results])
 
 
 if __name__ == "__main__":

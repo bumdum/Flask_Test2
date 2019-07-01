@@ -37,7 +37,7 @@ var zoomed = false;
 window.onload = function() {
 
     // Load data.
-    d3.json("2010au.json", function(data) {
+    d3.json("data.json", function(data) {
 
         // Check integrity.
         integrityCheck(data);

@@ -4,11 +4,13 @@ var width = 300,
     radius = Math.min(width, height) / 1.9,
     spacing = .09,
     r = 0;
-var races = [];
-d3.json(url).then(function (response) { races = response; });
+
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+var races = {{ g.races|safe }};
+
 document.getElementById("raceName").innerHTML =  races[r].n;
-var topLaps; 
-getTopLaps();
+var fastestLaps; 
+getFastestLaps();
 
 var color = d3.scale.linear()
     .range(["hsl(-180,60%,50%)", "hsl(180,60%,50%)"])
@@ -77,8 +79,7 @@ function tick() {
           if(d.index === .8)
           {
             console.log(r + " index: " + d.index);
-            getTopLaps();
-            console.log("toplaps: " + topLaps);
+            getFastestLaps();
             document.getElementById("raceName").innerHTML =  races[r].n;
             r++;
             if(r >= 21)
@@ -117,12 +118,11 @@ function arcTween(arc) {
   };
 }
 
-function getTopLaps() {
-  console.log("raceId: " + races[r].r);
-  $.getJSON($SCRIPT_ROOT + '/api/get_toplaps', {
+function getFastestLaps() {
+  $.getJSON($SCRIPT_ROOT + '/get_fastest_laps', {
         a: races[r].r
       }, function(data) {
-        topLaps = data;
+        fastestLaps = data;
       })
   .fail(function(e) {
     console.log(e);
@@ -133,11 +133,11 @@ function fields() {
   var now = new Date;
   var first, second, third;
 
-  if(topLaps)
+  if(fastestLaps)
   {
-    first = topLaps[0].n + " " + topLaps[0].t;
-    second = topLaps[1].n + " " + topLaps[1].t;
-    third = topLaps[2].n + " " + topLaps[2].t;
+    first = fastestLaps[0].n + " " + fastestLaps[0].t;
+    second = fastestLaps[1].n + " " + fastestLaps[1].t;
+    third = fastestLaps[2].n + " " + fastestLaps[2].t;
   }
 
   return [
