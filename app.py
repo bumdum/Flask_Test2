@@ -1,7 +1,7 @@
 import os
 
-import pandas as pd
-import numpy as np
+#import pandas as pd
+#import numpy as np
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -26,7 +26,7 @@ f1_pit_data = Base.classes.pit_data
 
 @app.route("/")
 def home():
-    g.races = db.session.query(f1_data.raceId, f1_data.race_name).distinct().filter_by(f1_data.year = 2017).all()
+    g.races = db.session.query(f1_data.raceId, f1_data.race_name).distinct().filter_by(year = '2017').all()
     return render_template("index.html")
 
 @app.route("/data")
@@ -187,7 +187,7 @@ def pit():
 @app.route("/get_fastest_laps")
 def fastestlaps():
     raceId = request.args.get('a', 0, type=int)
-    results = db.session.query(*sel).filter_by(sel.f1_lap_data.raceId = raceId).order_by(sel.f1_lap_data.position).limit(3).all()
+    results = db.session.query(f1_lap_data.driverRef, f1_lap_data.lap_time).filter_by(raceId = raceId).order_by(position).limit(3).all()
     return jsonify([dict(zip(tuple ('nt') ,i)) for i in results])
 
 

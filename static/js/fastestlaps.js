@@ -4,10 +4,7 @@ var width = 300,
     radius = Math.min(width, height) / 1.9,
     spacing = .09,
     r = 0;
-
-$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-var races = {{ g.races|safe }};
-
+    
 document.getElementById("raceName").innerHTML =  races[r].n;
 var fastestLaps; 
 getFastestLaps();
