@@ -49,7 +49,10 @@ def home():
         
         if driver.statusId != 1 and driver.statusId != 3:
             m = []
-            m.append(driver.laps)
+            if driver.laps > 0:
+                m.append(driver.laps - 1)
+            else:
+                m.append(2)
             b.append(m)
 
         if driver.statusId == 3:

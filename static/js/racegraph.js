@@ -103,8 +103,8 @@ function checkLaps(laps, lapCount) {
         }
         else if (places.length == 0 || places.length > lapCount + 1) {
 
-            alert("Warning: invalid number of placings (" + places.length + ") for element " + j +
-                " (" + name + ") - expected between 1 and " + (lapCount - 1));
+            /*alert("Warning: invalid number of placings (" + places.length + ") for element " + j +
+                " (" + name + ") - expected between 1 and " + (lapCount - 1));*/
         }
 
         // Check markers.
@@ -130,7 +130,7 @@ function checkLaps(laps, lapCount) {
                 var placing = places[i];
                 if (isNaN(placing) || placing < 1 || placing % 1 != 0) {
 
-                    alert("Warning: invalid placing '" + placing + "' for " + laps[j].name)
+                    //alert("Warning: invalid placing '" + placing + "' for " + laps[j].name)
                 }
                 else {
 
@@ -174,7 +174,7 @@ function checkMarker(marker, type, max, index, name) {
             var stop = marker[i];
             if (isNaN(stop) || stop < 0 || stop >= max || stop % 1 != 0) {
 
-                alert("Warning: invalid " + type + " (" + stop + ") for element " + index + " (" + name + ")");
+                //alert("Warning: invalid " + type + " (" + stop + ") for element " + index + " (" + name + ")");
             }
         }
     }
