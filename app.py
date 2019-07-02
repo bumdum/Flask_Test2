@@ -28,7 +28,6 @@ f1_pit_data = Base.classes.pit_data
 def home():
 
     raceId = 971
-
     drivers = []
     all_drivers = db.session.query(f1_data.driverId, f1_data.driverRef, f1_data.statusId, f1_data.laps).filter_by(raceId = raceId).distinct(f1_data.raceId,f1_data.RaceName).all()
     for driver in all_drivers:
@@ -49,19 +48,19 @@ def home():
         b.append(pit)
         
         if driver.statusId != 1 and driver.statusId != 3:
-            b.append(driver.laps)
+            m = []
+            m.append(driver.laps)
+            b.append(m)
 
         if driver.statusId == 3:
             b.append(driver.laps)
         
-        a = [u"name", u"placing", u"pitstops", u"mechanical", u"accident"]
+        a = ["name", "placing", "pitstops", "mechanical", "accident"]
         test2 = dict(zip(a, b))
         drivers.append(test2)
 
-    x = ["lapCount", "laps"]
-    y = [57,drivers]
-    test = dict({zip(tuple (x), y)})
-    g.raceGraph = test
+    data = dict((('lapCount',57),('laps',drivers)))
+    g.raceGraph = data
 
     races = db.session.query(f1_data.raceId,f1_data.RaceName).filter_by(year = '2017').distinct(f1_data.raceId,f1_data.RaceName).all()
     g.races = [dict(zip(tuple ('rn') , i)) for i in races]
