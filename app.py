@@ -26,6 +26,39 @@ f1_pit_data = Base.classes.pit_data
 
 @app.route("/")
 def home():
+
+    raceId = 971
+
+    drivers = []
+    all_drivers = db.session.query(f1_data.driverId, f1_data.driverRef, f1_data.statusId, f1_data.laps).filter_by(raceId = raceId).distinct(f1_data.raceId,f1_data.RaceName).all()
+    for driver in all_drivers:
+        placing = []
+        b = []
+        b.append(driver.driverRef)
+        results = db.session.query(f1_lap_data.position).filter_by(raceId = raceId, driverId = driver.driverId).order_by(f1_lap_data.lap).all()
+        for place in results:
+            placing.append(place.position)
+
+        b.append(placing)
+        pit = []
+        pitstops = db.session.query(f1_pit_data.Pit_lap).filter_by(raceId = raceId, driverId = driver.driverId).order_by(f1_pit_data.Pit_lap).all()
+        for pitstop in pitstops:
+            if pitstop.Pit_lap > 1:
+                pit.append(pitstop.Pit_lap)
+
+        b.append(pit)
+        
+        if driver.statusId != 1 and driver.statusId != 3:
+            b.append(driver.laps)
+
+        if driver.statusId == 3:
+            b.append(driver.laps)
+        
+        a = [u'name', u'placing', u'pitstops', u'mechanical', u'accident']
+        drivers.append(list(zip(a, b)))
+
+    g.raceGraph = drivers
+
     races = db.session.query(f1_data.raceId,f1_data.RaceName).filter_by(year = '2017').distinct(f1_data.raceId,f1_data.RaceName).all()
     g.races = [dict(zip(tuple ('rn') , i)) for i in races]
     return render_template("index.html")
