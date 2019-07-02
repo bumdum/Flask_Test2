@@ -54,10 +54,14 @@ def home():
         if driver.statusId == 3:
             b.append(driver.laps)
         
-        a = [u'name', u'placing', u'pitstops', u'mechanical', u'accident']
-        drivers.append(list(zip(a, b)))
+        a = [u"name", u"placing", u"pitstops", u"mechanical", u"accident"]
+        test2 = dict(zip(a, b))
+        drivers.append(test2)
 
-    g.raceGraph = drivers
+    x = ["lapCount", "laps"]
+    y = [57,drivers]
+    test = dict({zip(tuple (x), y)})
+    g.raceGraph = test
 
     races = db.session.query(f1_data.raceId,f1_data.RaceName).filter_by(year = '2017').distinct(f1_data.raceId,f1_data.RaceName).all()
     g.races = [dict(zip(tuple ('rn') , i)) for i in races]
