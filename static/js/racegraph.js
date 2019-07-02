@@ -36,28 +36,26 @@ var zoomed = false;
 //
 window.onload = function() {
 
-    // Load data.
-    d3.json("/static/js/data.json", function(data) {
 
-        // Check integrity.
-        integrityCheck(data);
+    // Check integrity.
+    integrityCheck(raceGraph);
 
-        // Sort laps on finishing order.
-        data.laps.sort(function(a, b) {
+    // Sort laps on finishing order.
+    raceGraph.laps.sort(function(a, b) {
 
-            var aLaps = a.placing.length;
-            var bLaps = b.placing.length;
-            return aLaps == bLaps ? a.placing[aLaps - 1] - b.placing[bLaps - 1] : bLaps - aLaps;
-        });
-
-        // Process lap markers..
-        data.pitstops = processLapMarkers(data, "pitstops");
-        data.mechanical = processLapMarkers(data, "mechanical");
-        data.accident = processLapMarkers(data, "accident");
-
-        // Visualize the data.
-        visualize(data);
+        var aLaps = a.placing.length;
+        var bLaps = b.placing.length;
+        return aLaps == bLaps ? a.placing[aLaps - 1] - b.placing[bLaps - 1] : bLaps - aLaps;
     });
+
+    // Process lap markers..
+    raceGraph.pitstops = processLapMarkers(raceGraph, "pitstops");
+    raceGraph.mechanical = processLapMarkers(raceGraph, "mechanical");
+    raceGraph.accident = processLapMarkers(raceGraph, "accident");
+
+    // Visualize the data.
+    visualize(raceGraph);
+
 };
 
 // Check data.
