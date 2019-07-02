@@ -1,6 +1,6 @@
 // Dimensions.
 const DIMENSIONS = getWindowDimensions();
-const WIDTH =  600;//DIMENSIONS.width - 20;    // 20 => padding.
+const WIDTH =  800;//DIMENSIONS.width - 20;    // 20 => padding.
 const HEIGHT = 500;//DIMENSIONS.height - 50;  // 50 => legend, title and padding.
 
 // Insets.
